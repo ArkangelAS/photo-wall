@@ -1,0 +1,11 @@
+
+{
+  "name": "summit-cloud-photography",
+  "build": {
+    "command": "npm install && npm run build"
+  },
+  "static": {
+    "directory": "dist",
+    "spa": true
+  }
+}
