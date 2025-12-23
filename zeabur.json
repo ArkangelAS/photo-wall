@@ -1,6 +1,4 @@
-
 {
-  "name": "summit-cloud-photography",
   "build": {
     "command": "npm install && npm run build"
   },
