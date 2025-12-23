@@ -36,11 +36,23 @@ const App: React.FC = () => {
 
   // Save data to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem('event_photos', JSON.stringify(photos));
+    try {
+      localStorage.setItem('event_photos', JSON.stringify(photos));
+    } catch (e) {
+      console.warn('存储空间已满：照片数量过多，部分照片可能无法持久化。', e);
+      // 如果溢出，只保留最近的 50 张以尝试拯救持久化
+      if (photos.length > 50) {
+        try {
+          localStorage.setItem('event_photos', JSON.stringify(photos.slice(0, 50)));
+        } catch (e2) {}
+      }
+    }
   }, [photos]);
 
   useEffect(() => {
-    localStorage.setItem('event_settings', JSON.stringify(settings));
+    try {
+      localStorage.setItem('event_settings', JSON.stringify(settings));
+    } catch (e) {}
   }, [settings]);
 
   const addPhotos = useCallback((newPhotos: Photo[]) => {
@@ -58,7 +70,6 @@ const App: React.FC = () => {
   return (
     <Router>
       <div className="min-h-screen flex flex-col font-sans">
-        {/* Navigation Bar - Primarily for the administrator to switch or access admin */}
         <nav className="bg-slate-900 text-white px-4 py-3 flex justify-between items-center text-sm sticky top-0 z-50">
           <div className="flex items-center gap-6">
             <Link to="/" className="font-bold tracking-tight text-blue-400">峰会云摄影系统</Link>
