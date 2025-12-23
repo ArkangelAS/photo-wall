@@ -1,5 +1,5 @@
 {
-  "name": "峰会云摄影直播系统",
+  "name": "summit-cloud-photography",
   "description": "专业商务会议照片实时直播平台，支持摄影师批量上传与即时拍摄，参会者通过瀑布流照片墙实时浏览与分享。",
   "requestFramePermissions": [
     "camera"
